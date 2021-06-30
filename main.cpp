@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <ctime>
 #include <cstring>
+#include <conio.h>
 
 
 using namespace std;
@@ -14,17 +15,20 @@ void menuselec(const char* texto, int posx, int posy, bool selec);
 
 int ingdataint(const char* texto, int posx, int posy);
 
-void fondo(int posx, int posy,int maxx,int maxy);
+void fondo(int posx, int posy, int maxx, int maxy, int COLOR);
 
 
 int main(){
     char ingreso[3]={};
+    int dado[6]={},maxtirada[6]={};
     char nombjug;
-    int op,cantrondas;
-    int y=0;
+    int op, rondastot, apost;
+    int y=0, punt=0, tir=1, rond=1;
 
     do{
-        fondo(26,9,56,18);
+
+        //recuadro(26, 9, 40, 20, 0, 14);
+        fondo(26,9,56,18,5);
         rlutil::setConsoleTitle("20 de Gieco Tomas y Diego Olivera");
         rlutil::hidecursor();
 
@@ -58,21 +62,83 @@ int main(){
 
         case 1:     //ENTER
             switch(y){
-            case 0:     ///Modo un jugador
-                system("cls");
-                fondo(26,9,61,12);
+            case 0:     /// MODO UN JUGADOR
 
+                system("cls");
+                fondo(26,9,61,12,5);
                 rlutil::locate(29,10);
                 rlutil::setColor(rlutil::WHITE);
                 cout<<"Nombre del ludopata de hoy: ";
+
                 nombjug=cargarVectorchar(ingreso,3);
-                cantrondas=ingdataint("Cantidad de rondas a jugar: ",29,11);
+                rondastot=ingdataint("Cantidad de rondas a jugar: ",29,11);
 
                 system("cls");
 
-                fondo(1,2,100,25);
+                while(rond<=rondastot){
 
-            case 4:     ///Salir del programa
+                    clrscr();
+                    fondo(1,2,100,25,5);
+                    rlutil::setColor(rlutil::WHITE);
+                    rlutil::locate(3,2);
+                    cout<<"Cantidad de puntos apostados: ";cin>>apost;
+                    //punt=punt+apost; ///ACOMODAR DESPUES EL ACUMULADOR
+
+                    clrscr();
+                    fondo(1,2,100,25,5);
+                    rlutil::setColor(rlutil::WHITE);
+                    rlutil::locate(3,2);
+                    cout<<"Nombre de jugador: "; mostrarVectorChar(ingreso,3);
+                    //rlutil::locate(27,2);
+                    cout<<"  |  ";
+                    //rlutil::locate(30,2);
+                    cout<<"Ronda N"<<(char)167<<rond;
+                    //rlutil::locate(41,2);
+                    cout<<"  |  ";
+                    //rlutil::locate(44,2);
+                    cout<<"Puntaje Acumulado: "<<punt;
+                    while(tir<=6){
+                        gotoxy(3,4);
+                        cout<<"Tirada N"<<(char)167<<tir<<endl;
+                        cargarAleatorio(dado,6,6);
+                        mostrarVector(dado,6);
+                        maxtirada[tir-1]=maximoVector(dado,6);
+
+                        rlutil::locate(3,7);
+                        cout<<"Maximas tiradas: "<<maxtirada[tir-1];
+                        ponerCero(dado,6);
+
+
+
+
+
+                        tir++;
+                        gotoxy(50,25);
+                        if(tir<=6){
+                            cout<<"Pulse cualquier tecla para la siguiente tirada";
+                            getch();
+                        }
+                    }
+                    tir=1;
+                    rond++;
+                    gotoxy(50,25);
+                    cout<<" Pulse cualquier tecla para la siguiente ronda";
+                    getch();
+
+
+                }
+                rond=1;
+                clrscr();
+                break;
+            case 1:   /// MODO 2 JUGADORES
+                break;
+
+            case 2:   /// PUNTUACION MAS ALTA
+                break;
+
+            case 3:   /// MODO DE PRUEBA
+                break;
+            case 4:   ///Salir del programa
                     op=0;
                 break;
             }
@@ -116,9 +182,10 @@ int ingdataint(const char* pedido, int posx, int posy){
 }
 
 
-void fondo(int posx, int posy, int maxx, int maxy){
+void fondo(int posx, int posy, int maxx, int maxy, int COLOR){
 
     int auxx,auxy;
+    rlutil::setColor(COLOR);
 
     gotoxy(posx,posy-1); cout<<(char)201; //esquina superior izquierda
     gotoxy(maxx,posy-1); cout<<(char)187; //esquina superior derecha

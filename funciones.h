@@ -80,7 +80,6 @@ int maximoVector(int v[], int tam){
     for(i=0;i<tam;i++){
         if(v[i]>maxvector) {
                 maxvector=v[i];
-
         }
     }
     return maxvector;
@@ -165,7 +164,7 @@ void cargarVector(int v[], int tam){
     }
 }
 
-char cargarVectorchar (char v[], int tam){
+char cargarVectorchar(char v[], int tam){
     int i;
     for(i=0;i<tam;i++){
        /// cout<<"INGRESE NUMERO: ";

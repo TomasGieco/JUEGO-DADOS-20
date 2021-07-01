@@ -11,6 +11,8 @@ using namespace std;
 #include "rlutil.h"
 #include "funciones.h"
 
+int puntuacion(int sum);
+
 void menuselec(const char* texto, int posx, int posy, bool selec);
 
 int ingdataint(const char* texto, int posx, int posy);
@@ -20,12 +22,14 @@ void fondo(int posx, int posy, int maxx, int maxy, int COLOR);
 
 int main(){
     char ingreso[3]={};
-    int dado[6]={},maxtirada[6]={};
     char nombjug;
-    int op, rondastot, apost;
-    int y=0, punt=0, tir=1, rond=1;
 
-    do{
+    int op, rondastot, apost, sum, genpunt, i, prepunt;
+    int y=0, punt=0, tir=1, rond=1,cont=5, mult=0, rond0=0, rondperd=0;
+    int dado[5]={},maxtirada[5]={};
+
+
+    while(op != 0){
 
         //recuadro(26, 9, 40, 20, 0, 14);
         fondo(26,9,56,18,5);
@@ -60,7 +64,8 @@ int main(){
             }
         break;
 
-        case 1:     //ENTER
+        case 1:
+                 //ENTER
             switch(y){
             case 0:     /// MODO UN JUGADOR
 
@@ -70,7 +75,7 @@ int main(){
                 rlutil::setColor(rlutil::WHITE);
                 cout<<"Nombre del ludopata de hoy: ";
 
-                nombjug=cargarVectorchar(ingreso,3);
+                cargarVectorchar(ingreso,3);
                 rondastot=ingdataint("Cantidad de rondas a jugar: ",29,11);
 
                 system("cls");
@@ -82,51 +87,115 @@ int main(){
                     rlutil::setColor(rlutil::WHITE);
                     rlutil::locate(3,2);
                     cout<<"Cantidad de puntos apostados: ";cin>>apost;
-                    //punt=punt+apost; ///ACOMODAR DESPUES EL ACUMULADOR
 
-                    clrscr();
-                    fondo(1,2,100,25,5);
-                    rlutil::setColor(rlutil::WHITE);
-                    rlutil::locate(3,2);
-                    cout<<"Nombre de jugador: "; mostrarVectorChar(ingreso,3);
-                    //rlutil::locate(27,2);
-                    cout<<"  |  ";
-                    //rlutil::locate(30,2);
-                    cout<<"Ronda N"<<(char)167<<rond;
-                    //rlutil::locate(41,2);
-                    cout<<"  |  ";
-                    //rlutil::locate(44,2);
-                    cout<<"Puntaje Acumulado: "<<punt;
-                    while(tir<=6){
+                    while(tir<=5){
+
+                        clrscr();
+                        fondo(1,2,100,25,5);
+                        rlutil::setColor(rlutil::WHITE);
+                        rlutil::locate(3,2);
+                        cout<<"Nombre de jugador: "; mostrarVectorChar(ingreso,3);
+                        cout<<"  |  ";
+                        cout<<"Ronda N"<<(char)167<<rond;
+                        cout<<"  |  ";
+                        cout<<"Puntaje Acumulado: "<<punt;
                         gotoxy(3,4);
                         cout<<"Tirada N"<<(char)167<<tir<<endl;
-                        cargarAleatorio(dado,6,6);
-                        mostrarVector(dado,6);
-                        maxtirada[tir-1]=maximoVector(dado,6);
+
+                        gotoxy(3,5);
+
+                        cargarAleatorio(dado,5,6);
+                        mostrarVector(dado,cont);
+                        maxtirada[tir-1]=maximoVector(dado,cont);
 
                         rlutil::locate(3,7);
                         cout<<"Maximas tiradas: "<<maxtirada[tir-1];
-                        ponerCero(dado,6);
-
-
+                        ponerCero(dado,5);
 
 
 
                         tir++;
+                        cont--;
                         gotoxy(50,25);
-                        if(tir<=6){
+                        if(tir<=5){
                             cout<<"Pulse cualquier tecla para la siguiente tirada";
                             getch();
+                            clrscr();
+
                         }
                     }
+                    sum=sumarVector(maxtirada,5);
+                    gotoxy(3,8);
+                    cout<<"Suma de puntajes: "<<sum;
+                    mult=0;
+                    if(sum>=20){
+
+                        genpunt=puntuacion(sum);
+                        gotoxy(3,9);
+                        cout<<"Tirada de puntaje ";
+
+                        gotoxy(3,10);
+                        cargarAleatorio(dado,5,6);
+                        mostrarVector(dado,5);
+
+                        for(i=0;i<=5;i++){
+                            if(dado[i]==genpunt){
+                                mult++;
+                            }
+                        }
+
+                        if(mult==0){
+                            rond0++;
+                        }
+
+                            prepunt=apost*mult;
+                            punt=punt+prepunt;
+
+                        cout<<"Puntuacion obtenida: "<<prepunt;
+                    }
+
+
+
+                    else{
+                        gotoxy(3,9);
+                        punt=punt-apost;
+                        rondperd++;
+
+                        cout<<"Habra que recuperar los puntos. Puntaje obtenido: "<<apost*(-1);
+
+                    }
+
+
+
+                    cont=5;
                     tir=1;
                     rond++;
                     gotoxy(50,25);
                     cout<<" Pulse cualquier tecla para la siguiente ronda";
                     getch();
 
-
                 }
+                clrscr();
+                fondo(1,2,100,25,5);
+                fondo(30,10,75,16,rlutil::LIGHTRED);
+                rlutil::setColor(rlutil::WHITE);
+
+                gotoxy(35,11);
+                cout<<"Nombre de jugador: "; mostrarVectorChar(ingreso,3);
+                cout<<endl;
+                gotoxy(35,12);
+                cout<<"Cantidad de rondas sin ganancia: "<<rond0<<endl;
+                gotoxy(35,13);
+                cout<<"Cantidad de rondas con perdida: "<<rondperd<<endl<<endl;
+                gotoxy(35,15);
+                cout<<"Puntaje Final: "<<punt<<endl;
+
+
+                getch();
+
+                rondperd=0;
+                rond0=0;
+                punt=0;
                 rond=1;
                 clrscr();
                 break;
@@ -143,8 +212,9 @@ int main(){
                 break;
             }
         break;
+
         }
-    }while(op != 0);
+    }
 
 
 rlutil::locate(0,300);
@@ -155,7 +225,35 @@ return 0;
 
 
 
+int puntuacion(int sum){
 
+    int genpunt;
+    switch(sum){
+    case 20:
+        genpunt=1;
+    break;
+    case 21:
+        genpunt=2;
+    break;
+    case 22:
+        genpunt=3;
+    break;
+    case 23:
+        genpunt=4;
+    break;
+    case 24:
+        genpunt=5;
+    break;
+    case 25:
+        genpunt=6;
+    break;
+    default:
+        genpunt=6;
+    break;
+    }
+
+    return genpunt;
+}
 
 
 void menuselec(const char* texto, int posx, int posy, bool selec){

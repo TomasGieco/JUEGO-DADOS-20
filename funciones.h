@@ -9,6 +9,9 @@
 using namespace std;*/
 
 /// DECLARACIÓN/PROTOTIPO DE FUNCIONES
+
+void cargarVectorPos(int v[], int tam, int posx, int posy);
+
 void cargarVector(int v[], int tam);///asigna valores a cada una de las posiciones del vector
 
 char cargarVectorchar (char v[], int tam);///asigna valores a cada una de las posiciones del vector char
@@ -159,21 +162,25 @@ bool compararVectores(int v[], int v2[],int tam ){
 void cargarVector(int v[], int tam){
     int i;
     for(i=0;i<tam;i++){
-        cout<<"INGRESE NUMERO: ";
         cin>>v[i];
+    }
+}
+
+void cargarVectorPos(int v[], int tam, int posx, int posy){
+    int i;
+    for(i=0;i<tam;i++){
+        gotoxy(posx+=1,posy);
+        cin>>v[i]; cout<<"\t";
     }
 }
 
 char cargarVectorchar(char v[], int tam){
     int i;
     for(i=0;i<tam;i++){
-       /// cout<<"INGRESE NUMERO: ";
         cin>>v[i];
     }
     return v[3];
 }
-
-
 
 enum Color{
 cNEGRO=0,
@@ -246,5 +253,8 @@ void recuadro(short iniX, short iniY, short ancho, short alto, short colorLinea=
         }
     }
 }
+
+
+
 
 #endif // FUNCIONES_H_INCLUDED

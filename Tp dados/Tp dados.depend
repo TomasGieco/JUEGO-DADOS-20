@@ -1,0 +1,83 @@
+# depslib dependency file v1.0
+1625021198 source:c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados prueba 1\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<ctime>
+	<cstring>
+	<conio.h>
+	"rlutil.h"
+	"funciones.h"
+
+1624674858 c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados prueba 1\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1625020877 c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados prueba 1\funciones.h
+	<cstdlib>
+	<cstdio>
+	<ctime>
+
+1626064650 source:c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<ctime>
+	<cstring>
+	<conio.h>
+	"rlutil.h"
+	"funciones.h"
+	"ascii.h"
+
+1626060293 c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1626064354 c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados\funciones.h
+	<cstdlib>
+	<cstdio>
+	<ctime>
+
+1625092260 source:c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados\pruebas.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<ctime>
+	<cstring>
+	<conio.h>
+	"rlutil.h"
+	"funciones.h"
+
+1626060293 c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados\ascii.h
+
+1626064582 source:c:\users\usuario\desktop\tps laboratorio\tp dados 20\tp dados\function.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<ctime>
+	<cstring>
+	<conio.h>
+	"rlutil.h"
+	"funciones.h"
+	"ascii.h"
+

@@ -10,6 +10,7 @@ using namespace std;
 #include "rlutil.h"
 #include "funciones.h"
 #include "ascii.h"
+void mayortirada(int v[],int tam,int posx,int posy);
 
 void tirada(int v[], int tam, int posx, int posy);
 
@@ -94,7 +95,7 @@ int main(){
                     while(tir<=5){
 
                         clrscr();
-                        fondo(1,2,100,25,5);
+                        fondo(1,2,100,29,5);
                         rlutil::setColor(rlutil::WHITE);
                         rlutil::locate(3,2);
                         cout<<"Nombre de jugador: "; mostrarVectorChar(jugador,3);
@@ -111,15 +112,15 @@ int main(){
                         maxtirada[tir-1]=maximoVector(dado,cont);
 
 
-                        rlutil::locate(3,12);
-                        cout<<"Maxima tiradas: "<<maxtirada[tir-1];
+                        rlutil::locate(3,15);
+                        cout<<"Maxima tirada: ";mayortirada(maxtirada,tir,17,14);
                         ponerCero(dado,5);
 
 
 
                         tir++;
                         cont--;
-                        gotoxy(50,25);
+                        gotoxy(50,29);
                         if(tir<=5){
                             cout<<"Pulse cualquier tecla para la siguiente tirada";
                             getch();
@@ -128,16 +129,16 @@ int main(){
                         }
                     }
                     sum=sumarVector(maxtirada,5);
-                    gotoxy(3,14);
+                    gotoxy(3,20);
                     cout<<"Suma de puntajes: "<<sum;
                     mult=0;
                     if(sum>=20){
                         Sleep(500);
                         genpunt=puntuacion(sum);
-                        gotoxy(3,15);
+                        gotoxy(3,22);
                         cout<<"Tirada de puntaje: ";
 
-                        tirada(dado,5,3,17);
+                        tirada(dado,5,3,24);
 
                         for(i=0;i<=5;i++){
                             if(dado[i]==genpunt){
@@ -152,12 +153,12 @@ int main(){
                         prepunt=apost*mult;
                         punt=punt+prepunt;
 
-                        gotoxy(3,23);
+                        gotoxy(3,29);
                         cout<<"Puntuacion obtenida: "<<prepunt;
                     }
 
                     else{
-                        gotoxy(3,15);
+                        gotoxy(3,20);
                         punt=punt-apost;
                         rondperd++;
 
@@ -169,7 +170,7 @@ int main(){
                     cont=5;
                     tir=1;
                     rond++;
-                    gotoxy(50,25);
+                    gotoxy(52,29);
                     cout<<" Pulse cualquier tecla para la siguiente ronda";
                     getch();
 
@@ -300,7 +301,7 @@ int main(){
                     while(tir<=5){
 
                         clrscr();
-                        fondo(1,2,100,25,5);
+                        fondo(1,2,100,29,5);
                         rlutil::setColor(rlutil::WHITE);
                         rlutil::locate(3,2);
                         cout<<"Nombre de jugador: "; mostrarVectorChar(jugador,3);
@@ -316,15 +317,15 @@ int main(){
                         tiradaprueba(dado,cont,3,6,17,5);
                         maxtirada[tir-1]=maximoVector(dado,cont);
 
-                        rlutil::locate(3,12);
-                        cout<<"Maxima tiradas: "<<maxtirada[tir-1];
+                        rlutil::locate(3,13);
+                        cout<<"Maxima tirada: ";mayortirada(maxtirada,tir,18,12);
                         ponerCero(dado,5);
 
 
 
                         tir++;
                         cont--;
-                        gotoxy(50,25);
+                        gotoxy(52,29);
                         if(tir<=5){
                             cout<<"Pulse cualquier tecla para la siguiente tirada";
                             getch();
@@ -333,19 +334,19 @@ int main(){
                         }
                     }
                     sum=sumarVector(maxtirada,5);
-                    gotoxy(3,14);
+                    gotoxy(3,17);
                     cout<<"Suma de puntajes: "<<sum;
                     mult=0;
                     if(sum>=20){
                         Sleep(500);
                         genpunt=puntuacion(sum);
-                        gotoxy(3,15);
+                        gotoxy(3,18);
                         cout<<"Tirada de puntaje: ";
-                        gotoxy(3,16);
+                        gotoxy(3,19);
                         cout<<"Ingrese dado: ";
 
 
-                        tiradaprueba(dado,5,3,17,17,16);
+                        tiradaprueba(dado,5,3,20,17,19);
 
                         for(i=0;i<=5;i++){
                             if(dado[i]==genpunt){
@@ -360,12 +361,12 @@ int main(){
                         prepunt=apost*mult;
                         punt=punt+prepunt;
 
-                        gotoxy(3,23);
+                        gotoxy(3,28);
                         cout<<"Puntuacion obtenida: "<<prepunt;
                     }
 
                     else{
-                        gotoxy(3,15);
+                        gotoxy(3,17);
                         punt=punt-apost;
                         rondperd++;
 
@@ -377,7 +378,7 @@ int main(){
                     cont=5;
                     tir=1;
                     rond++;
-                    gotoxy(50,25);
+                    gotoxy(52,29);
                     cout<<" Pulse cualquier tecla para la siguiente ronda";
                     getch();
 
@@ -618,13 +619,13 @@ int juego(char vJugador[], int apost, int rondout, int punt){
         tirada(dado,cont,3,6);
         maxtirada[tir-1]=maximoVector(dado,cont);
 
-        rlutil::locate(3,12);
-        cout<<"Maxima tiradas: "<<maxtirada[tir-1];
+        rlutil::locate(3,13);
+        cout<<"Maxima tiradas: ";mayortirada(maxtirada,tir,18,12);
         ponerCero(dado,5);
 
         tir++;
         cont--;
-        gotoxy(50,25);
+        gotoxy(52,25);
         if(tir<=5){
             cout<<"Pulse cualquier tecla para la siguiente tirada";
             getch();
@@ -633,16 +634,16 @@ int juego(char vJugador[], int apost, int rondout, int punt){
         }
     }
     sum=sumarVector(maxtirada,5);
-    gotoxy(3,14);
+    gotoxy(3,17);
     cout<<"Suma de puntajes: "<<sum;
     mult=0;
     if(sum>=20){
         Sleep(500);
         genpunt=puntuacion(sum);
-        gotoxy(3,15);
+        gotoxy(3,18);
         cout<<"Tirada de puntaje: ";
 
-        tirada(dado,5,3,17);
+        tirada(dado,5,3,19);
 
         for(i=0;i<=5;i++){
             if(dado[i]==genpunt){
@@ -653,7 +654,7 @@ int juego(char vJugador[], int apost, int rondout, int punt){
         prepunt=apost*mult;
         punt=punt+prepunt;
 
-        gotoxy(3,23);
+        gotoxy(3,25);
         cout<<"Puntuacion obtenida: "<<prepunt;
     }
 
@@ -667,7 +668,7 @@ int juego(char vJugador[], int apost, int rondout, int punt){
 
     cont=5;
     tir=1;
-    gotoxy(50,25);
+    gotoxy(52,25);
     cout<<" Pulse cualquier tecla para la siguiente ronda";
     getch();
 
@@ -675,6 +676,34 @@ int juego(char vJugador[], int apost, int rondout, int punt){
 clrscr();
 return punt;
 }
+void mayortirada(int v[],int tam,int posx,int posy){
 
+
+    if(v[tam-1]==1){
+        dado1(posx,posy);
+
+    }
+    if(v[tam-1]==2){
+        dado2(posx,posy);
+
+    }
+    if(v[tam-1]==3){
+        dado3(posx,posy);
+
+    }
+    if(v[tam-1]==4){
+        dado4(posx,posy);
+
+    }
+    if(v[tam-1]==5){
+        dado5(posx,posy);
+
+    }
+    if(v[tam-1]==6){
+        dado6(posx,posy);
+
+    }
+
+}
 
 
